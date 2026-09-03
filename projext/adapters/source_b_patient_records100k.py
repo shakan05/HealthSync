@@ -33,10 +33,23 @@ research doc's earlier guesses):
 
 Key structural facts that shape this adapter (all confirmed from real data):
   - patients.csv has NO SSN, NO name -- just patient_id. There is genuinely
-    no identity key here. Per the team's own design decision, every Source B
-    patient row (and everything that references it) is rejected with
-    reason "no identity key" until a fallback key is chosen. This adapter
-    does NOT invent one.
+    no identity key that could be cross-referenced against Source A's SSN.
+    CURRENT BEHAVIOR: patient_id is used directly as this source's internal
+    PATIENT_ID (see _normalize_patients() below) -- Source B patients load
+    and validate normally, they are NOT rejected.
+  - NO CROSS-SOURCE IDENTITY RESOLUTION IS PERFORMED ANYWHERE IN THIS
+    PIPELINE. Source A (Synthea, keyed by SSN) and Source B (keyed by
+    patient_id) are two entirely separate, unlinked patient populations.
+    A Source A patient and a Source B patient are never recognized as the
+    same real person, even if they are -- there is no matching logic, no
+    resolve_patient_identity(), no patient_id_mapping table. This was a
+    deliberate scope decision (cross-source linking deferred/dropped), not
+    an oversight. Anything downstream that assumes a unified cross-source
+    patient view (e.g. cross-source contradiction detection, a merged
+    timeline) will only ever see single-source data per patient.
+    If cross-source linking becomes a requirement later, it needs a real
+    fallback matching strategy (e.g. DOB + demographics) added explicitly --
+    don't assume patient_id values coincide with any Source A identifier.
   - patients.csv has no BIRTHDATE, only age -- approximated below, see
     _approximate_birthdate().
   - medications.csv and lab_results.csv have no coded values (no RxNorm/
