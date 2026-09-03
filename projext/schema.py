@@ -1,4 +1,3 @@
-
 """
 Internal normalized schema for the ingestion & validation layer.
 
@@ -18,6 +17,7 @@ Design notes:
 
 from dataclasses import dataclass, field
 from typing import Callable, Optional
+import re
 
 
 @dataclass
@@ -71,6 +71,16 @@ def _observation_value_check(value: str, row: dict) -> Optional[str]:
 
 GENDER_CHECK = _allowed_values({"M", "F"}, "GENDER")
 
+def _icd10_check(value: str, row: dict) -> Optional[str]:
+    # Lightweight ICD-10-CM shape check (not a real terminology lookup):
+    # one letter, two digits, optional decimal + up to 4 alphanumerics.
+    # e.g. E78.5, N18.3, I10, M19.90
+    if not value:
+        return None
+    if not re.match(r"^[A-TV-Z][0-9]{2}(\.[0-9A-Z]{1,4})?$", value):
+        return f"CODE '{value}' does not look like a valid ICD-10-CM code"
+    return None
+
 # Load order matters: patients -> encounters -> (conditions, medications,
 # observations, procedures) -> allergies. Reference validation depends on
 # earlier resources' identity sets already being built.
@@ -106,7 +116,9 @@ RESOURCE_CONFIGS: dict[str, ResourceConfig] = {
     ),
     "conditions": ResourceConfig(
         resource_type="conditions",
-        required_fields=["PATIENT", "ENCOUNTER", "CODE", "START"],
+        required_fields=["PATIENT", "CODE", "START"],  # ENCOUNTER optional per Section 4.5
+        # of the research doc: required for Allergy only, optional-but-must-exist-if-present
+        # for Condition/MedicationRequest/Observation/Procedure.
         date_fields=["START", "STOP"],
         numeric_fields=[],
         reference_fields=[("PATIENT", "patients"), ("ENCOUNTER", "encounters")],
@@ -114,7 +126,7 @@ RESOURCE_CONFIGS: dict[str, ResourceConfig] = {
     ),
     "medications": ResourceConfig(
         resource_type="medications",
-        required_fields=["PATIENT", "ENCOUNTER", "CODE", "START"],
+        required_fields=["PATIENT", "CODE", "START"],  # ENCOUNTER optional, see conditions above
         date_fields=["START", "STOP"],
         numeric_fields=["BASE_COST", "PAYER_COVERAGE", "DISPENSES", "TOTALCOST"],
         reference_fields=[("PATIENT", "patients"), ("ENCOUNTER", "encounters")],
@@ -139,7 +151,7 @@ RESOURCE_CONFIGS: dict[str, ResourceConfig] = {
     ),
     "procedures": ResourceConfig(
         resource_type="procedures",
-        required_fields=["PATIENT", "ENCOUNTER", "CODE", "START"],
+        required_fields=["PATIENT", "CODE", "START"],  # ENCOUNTER optional, see conditions above
         date_fields=["START", "STOP"],
         numeric_fields=["BASE_COST"],
         reference_fields=[("PATIENT", "patients"), ("ENCOUNTER", "encounters")],
