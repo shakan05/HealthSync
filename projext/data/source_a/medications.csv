@@ -195,16 +195,16 @@ START,STOP,PATIENT,PAYER,ENCOUNTER,CODE,DESCRIPTION,BASE_COST,PAYER_COVERAGE,DIS
 2022-09-30T08:52:26Z,2023-10-06T08:52:26Z,378e3cb2-635b-8793-a732-092fe074d92a,a735bf55-83e9-331a-899d-a82a60b9f60c,378e3cb2-635b-8793-7d00-3c40deec359f,896209,60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler,345.44,134.79,12,4145.28,87433001,Pulmonary emphysema (disorder)
 2000-02-04T10:10:57Z,,dc65f29e-b2e6-13d2-efc0-e8eefbe3a96f,d18ef2e6-ef40-324c-be54-34a5ee865625,dc65f29e-b2e6-13d2-a9ad-506e2ef3c4a5,200033,carvedilol 25 MG Oral Tablet,129.94,94.94,7,909.58,88805009,Chronic congestive heart failure (disorder)
 2018-07-16T07:14:08Z,2018-07-16T07:14:08Z,cc181203-4e3d-3f4d-9121-e78da2a24177,734afbd6-4794-363b-9bc0-6a3981533ed5,cc181203-4e3d-3f4d-ed6c-d8f68ad2cdce,1535362,sodium fluoride 0.0272 MG/MG Oral Gel,129.94,0.00,1,129.94,103697008,Patient referral for dental care (procedure)
-2021-12-17T21:47:25Z,2022-12-23T21:47:25Z,8cee5a87-4fb9-6da6-6628-a75fc1e1d93f,0133f751-9229-3cfd-815f-b6d4979bdd6a,8cee5a87-4fb9-6da6-a95c-1efc38f38b56,206905,Ibuprofen 400 MG Oral Tablet [Ibu],129.94,0.00,3,389.82,,
-2021-12-17T21:47:25Z,2022-12-23T21:47:25Z,8cee5a87-4fb9-6da6-6628-a75fc1e1d93f,0133f751-9229-3cfd-815f-b6d4979bdd6a,8cee5a87-4fb9-6da6-a95c-1efc38f38b56,314076,lisinopril 10 MG Oral Tablet,0.91,0.00,4,3.64,59621000,Essential hypertension (disorder)
-2000-02-04T10:10:57Z,,dc65f29e-b2e6-13d2-efc0-e8eefbe3a96f,d18ef2e6-ef40-324c-be54-34a5ee865625,dc65f29e-b2e6-13d2-a9ad-506e2ef3c4a5,313988,Furosemide 40 MG Oral Tablet,1.22,0.00,7,8.54,88805009,Chronic congestive heart failure (disorder)
-2000-02-04T10:10:57Z,,dc65f29e-b2e6-13d2-efc0-e8eefbe3a96f,d18ef2e6-ef40-324c-be54-34a5ee865625,dc65f29e-b2e6-13d2-a9ad-506e2ef3c4a5,979492,losartan potassium 50 MG Oral Tablet,129.94,94.94,7,909.58,88805009,Chronic congestive heart failure (disorder)
-2023-10-06T08:52:26Z,2024-10-11T08:52:26Z,378e3cb2-635b-8793-a732-092fe074d92a,e03e23c9-4df1-3eb6-a62d-f70f02301496,378e3cb2-635b-8793-04f8-db9d93df06a2,245314,albuterol 5 MG/ML Inhalation Solution,20.63,0.00,4,82.52,87433001,Pulmonary emphysema (disorder)
-2000-02-04T10:10:57Z,,dc65f29e-b2e6-13d2-efc0-e8eefbe3a96f,d18ef2e6-ef40-324c-be54-34a5ee865625,dc65f29e-b2e6-13d2-a9ad-506e2ef3c4a5,314077,lisinopril 20 MG Oral Tablet,129.94,94.94,7,909.58,88805009,Chronic congestive heart failure (disorder)
-2021-12-31T23:47:09Z,2021-12-31T23:47:09Z,8cee5a87-4fb9-6da6-6628-a75fc1e1d93f,0133f751-9229-3cfd-815f-b6d4979bdd6a,8cee5a87-4fb9-6da6-23dc-332623004dd5,1535362,sodium fluoride 0.0272 MG/MG Oral Gel,129.94,0.00,1,129.94,66383009,Gingivitis (disorder)
-2023-10-06T08:52:26Z,2024-10-11T08:52:26Z,378e3cb2-635b-8793-a732-092fe074d92a,e03e23c9-4df1-3eb6-a62d-f70f02301496,378e3cb2-635b-8793-04f8-db9d93df06a2,896209,60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler,185.25,0.00,12,2223.00,87433001,Pulmonary emphysema (disorder)
-2023-10-20T12:02:48Z,2023-10-20T12:02:48Z,378e3cb2-635b-8793-a732-092fe074d92a,e03e23c9-4df1-3eb6-a62d-f70f02301496,378e3cb2-635b-8793-e22b-7dea29ed68c0,1535362,sodium fluoride 0.0272 MG/MG Oral Gel,129.94,0.00,1,129.94,66383009,Gingivitis (disorder)
-2022-12-23T21:47:25Z,2023-12-29T21:47:25Z,8cee5a87-4fb9-6da6-6628-a75fc1e1d93f,0133f751-9229-3cfd-815f-b6d4979bdd6a,8cee5a87-4fb9-6da6-f8bc-8983c60741de,206905,Ibuprofen 400 MG Oral Tablet [Ibu],129.94,0.00,3,389.82,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
 2024-10-11T08:52:26Z,2025-10-17T08:52:26Z,378e3cb2-635b-8793-a732-092fe074d92a,e03e23c9-4df1-3eb6-a62d-f70f02301496,378e3cb2-635b-8793-c390-1d986d894359,245314,albuterol 5 MG/ML Inhalation Solution,38.83,0.00,4,155.32,87433001,Pulmonary emphysema (disorder)
 2024-10-11T08:52:26Z,2025-10-17T08:52:26Z,378e3cb2-635b-8793-a732-092fe074d92a,e03e23c9-4df1-3eb6-a62d-f70f02301496,378e3cb2-635b-8793-c390-1d986d894359,896209,60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler,880.80,0.00,12,10569.60,87433001,Pulmonary emphysema (disorder)
 2022-12-23T21:47:25Z,2023-12-29T21:47:25Z,8cee5a87-4fb9-6da6-6628-a75fc1e1d93f,0133f751-9229-3cfd-815f-b6d4979bdd6a,8cee5a87-4fb9-6da6-f8bc-8983c60741de,314076,lisinopril 10 MG Oral Tablet,0.91,0.00,4,3.64,59621000,Essential hypertension (disorder)
@@ -399,25 +399,25 @@ START,STOP,PATIENT,PAYER,ENCOUNTER,CODE,DESCRIPTION,BASE_COST,PAYER_COVERAGE,DIS
 2022-06-19T19:41:54Z,2023-06-25T19:41:54Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-6d1d-5d03a3220e1f,308136,amLODIPine 2.5 MG Oral Tablet,0.91,0.00,4,3.64,59621000,Essential hypertension (disorder)
 2018-05-05T05:54:38Z,2018-05-05T05:54:38Z,a80c7eda-5e28-d31e-5c34-471599e77406,0133f751-9229-3cfd-815f-b6d4979bdd6a,a80c7eda-5e28-d31e-3b23-3eed25e69ff3,1535362,sodium fluoride 0.0272 MG/MG Oral Gel,129.94,0.00,1,129.94,103697008,Patient referral for dental care (procedure)
 2022-07-03T22:31:58Z,2022-07-03T22:31:58Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-b9db-842aed5b988e,1535362,sodium fluoride 0.0272 MG/MG Oral Gel,129.94,0.00,1,129.94,66383009,Gingivitis (disorder)
-2023-06-25T19:41:54Z,2024-06-30T19:41:54Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-6387-bc02c69b9a2b,310798,Hydrochlorothiazide 25 MG Oral Tablet,0.45,0.00,4,1.80,59621000,Essential hypertension (disorder)
-2023-06-25T19:41:54Z,2024-06-30T19:41:54Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-6387-bc02c69b9a2b,308136,amLODIPine 2.5 MG Oral Tablet,1.08,0.00,4,4.32,59621000,Essential hypertension (disorder)
-2020-03-20T00:32:26Z,2021-03-15T00:32:26Z,a80c7eda-5e28-d31e-5c34-471599e77406,0133f751-9229-3cfd-815f-b6d4979bdd6a,a80c7eda-5e28-d31e-2209-3a364721f856,749762,{7 (ethinyl estradiol 0.01 MG Oral Tablet) / 84 (ethinyl estradiol 0.03 MG / levonorgestrel 0.15 MG Oral Tablet) } Pack [Seasonique],229.32,0.00,12,2751.84,,
-2023-09-01T09:14:27Z,2023-09-01T09:14:27Z,a8702883-b47c-daac-95f8-578a8892a313,d18ef2e6-ef40-324c-be54-34a5ee865625,a8702883-b47c-daac-61fc-581c745c0476,1659131,piperacillin 2000 MG / tazobactam 250 MG Injection,129.94,94.94,1,129.94,91302008,Sepsis (disorder)
-2023-09-01T09:14:27Z,2023-09-01T09:14:27Z,a8702883-b47c-daac-95f8-578a8892a313,d18ef2e6-ef40-324c-be54-34a5ee865625,a8702883-b47c-daac-61fc-581c745c0476,1807510,150 ML vancomycin 5 MG/ML Injection,129.94,94.94,1,129.94,91302008,Sepsis (disorder)
-2023-07-16T21:58:16Z,2023-07-16T21:58:16Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-9c24-50450becd2cd,1535362,sodium fluoride 0.0272 MG/MG Oral Gel,129.94,0.00,1,129.94,103697008,Patient referral for dental care (procedure)
-2020-05-09T02:09:57Z,2020-05-10T19:09:57Z,a80c7eda-5e28-d31e-5c34-471599e77406,0133f751-9229-3cfd-815f-b6d4979bdd6a,a80c7eda-5e28-d31e-896e-c2d67f766bc3,1648755,nitrofurantoin  macrocrystals 25 MG / nitrofurantoin  monohydrate 75 MG Oral Capsule,129.94,0.00,1,129.94,307426000,Acute infective cystitis (disorder)
-2021-03-15T00:32:26Z,2022-03-10T00:32:26Z,a80c7eda-5e28-d31e-5c34-471599e77406,0133f751-9229-3cfd-815f-b6d4979bdd6a,a80c7eda-5e28-d31e-6443-9e41d0b896de,749762,{7 (ethinyl estradiol 0.01 MG Oral Tablet) / 84 (ethinyl estradiol 0.03 MG / levonorgestrel 0.15 MG Oral Tablet) } Pack [Seasonique],764.40,458.64,12,9172.80,,
-2024-06-30T19:41:54Z,2025-07-06T19:41:54Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-9691-1d8d1366c4f5,310798,Hydrochlorothiazide 25 MG Oral Tablet,0.84,0.00,4,3.36,59621000,Essential hypertension (disorder)
-2024-06-30T19:41:54Z,2025-07-06T19:41:54Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-9691-1d8d1366c4f5,308136,amLODIPine 2.5 MG Oral Tablet,1.16,0.00,4,4.64,59621000,Essential hypertension (disorder)
-2025-07-06T19:41:54Z,2026-07-12T19:41:54Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-d306-4b768fcdb373,310798,Hydrochlorothiazide 25 MG Oral Tablet,0.61,0.00,4,2.44,59621000,Essential hypertension (disorder)
-2025-07-06T19:41:54Z,2026-07-12T19:41:54Z,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,0133f751-9229-3cfd-815f-b6d4979bdd6a,87bd14e1-40d6-d9a5-d306-4b768fcdb373,308136,amLODIPine 2.5 MG Oral Tablet,0.91,0.00,4,3.64,59621000,Essential hypertension (disorder)
-2026-07-12T19:41:54Z,,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,8fa6c185-e44e-3e34-8bd8-39be8694f4ce,87bd14e1-40d6-d9a5-c463-b1aa95c3c6ff,310798,Hydrochlorothiazide 25 MG Oral Tablet,0.91,0.00,1,0.91,59621000,Essential hypertension (disorder)
-2026-07-12T19:41:54Z,,87bd14e1-40d6-d9a5-f646-7b5e55b2da9b,8fa6c185-e44e-3e34-8bd8-39be8694f4ce,87bd14e1-40d6-d9a5-c463-b1aa95c3c6ff,308136,amLODIPine 2.5 MG Oral Tablet,1.37,0.00,1,1.37,59621000,Essential hypertension (disorder)
-2024-06-22T00:32:26Z,2025-06-17T00:32:26Z,a80c7eda-5e28-d31e-5c34-471599e77406,734afbd6-4794-363b-9bc0-6a3981533ed5,a80c7eda-5e28-d31e-8c68-dbd8438b5362,749762,{7 (ethinyl estradiol 0.01 MG Oral Tablet) / 84 (ethinyl estradiol 0.03 MG / levonorgestrel 0.15 MG Oral Tablet) } Pack [Seasonique],229.32,183.46,12,2751.84,,
-1991-03-31T10:25:02Z,,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,b046940f-1664-3047-bca7-dfa76be352a4,6e809ed0-be5f-2ae5-fe6e-cd3668b38aa0,2001499,Vitamin B12 5 MG/ML Injectable Solution,73.61,51.53,431,31725.91,,
-2011-07-24T09:21:52Z,,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-52e4-9d33057e9fff,309362,Clopidogrel 75 MG Oral Tablet,200.18,160.14,184,36833.12,,
-2011-07-24T09:21:52Z,,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-52e4-9d33057e9fff,312961,Simvastatin 20 MG Oral Tablet,30.57,24.46,184,5624.88,,
-2011-07-24T09:21:52Z,,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-52e4-9d33057e9fff,866412,24 HR metoprolol succinate 100 MG Extended Release Oral Tablet,129.94,103.95,184,23908.96,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
 2011-07-24T09:21:52Z,,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-52e4-9d33057e9fff,705129,Nitroglycerin 0.4 MG/ACTUAT Mucosal Spray,113.77,91.02,184,20933.68,,
 2016-08-14T09:21:52Z,2017-08-20T09:21:52Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-14e5-a380ee9f7a1e,860975,24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet,1.74,1.39,12,20.88,44054006,Diabetes mellitus type 2 (disorder)
 2016-08-14T09:21:52Z,2017-08-20T09:21:52Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-14e5-a380ee9f7a1e,314076,lisinopril 10 MG Oral Tablet,0.91,0.73,4,3.64,59621000,Essential hypertension (disorder)
@@ -564,20 +564,20 @@ START,STOP,PATIENT,PAYER,ENCOUNTER,CODE,DESCRIPTION,BASE_COST,PAYER_COVERAGE,DIS
 2020-06-30T08:19:16Z,2021-06-30T08:19:16Z,81cceed4-235e-1775-976d-29140fa47a46,a735bf55-83e9-331a-899d-a82a60b9f60c,81cceed4-235e-1775-907d-ff349e98504c,314231,Simvastatin 10 MG Oral Tablet,0.30,0.24,12,3.60,55822004,Hyperlipidemia (disorder)
 2003-02-21T10:10:57Z,2026-05-09T10:10:57Z,ac3f694c-3c79-77d1-228a-e2737736700c,df166300-5a78-3502-a46a-832842197811,ac3f694c-3c79-77d1-d973-39069624ffe1,314231,Simvastatin 10 MG Oral Tablet,0.30,0.00,10,3.00,55822004,Hyperlipidemia (disorder)
 2020-11-07T08:19:16Z,2021-11-13T08:19:16Z,81cceed4-235e-1775-976d-29140fa47a46,a735bf55-83e9-331a-899d-a82a60b9f60c,81cceed4-235e-1775-ae00-77aa5eec24f1,209387,Acetaminophen 325 MG Oral Tablet [Tylenol],129.94,103.95,3,389.82,,
-2016-03-12T10:10:57Z,2017-03-24T10:10:57Z,ac3f694c-3c79-77d1-228a-e2737736700c,df166300-5a78-3502-a46a-832842197811,ac3f694c-3c79-77d1-c677-ca46715c30a6,314231,Simvastatin 10 MG Oral Tablet,0.30,0.00,12,3.60,55822004,Hyperlipidemia (disorder)
-2020-11-21T11:08:19Z,2020-11-21T11:08:19Z,81cceed4-235e-1775-976d-29140fa47a46,a735bf55-83e9-331a-899d-a82a60b9f60c,81cceed4-235e-1775-2c7d-4591f03a6a82,1535362,sodium fluoride 0.0272 MG/MG Oral Gel,129.94,103.95,1,129.94,66383009,Gingivitis (disorder)
-2021-06-30T08:19:16Z,2022-06-30T08:19:16Z,81cceed4-235e-1775-976d-29140fa47a46,a735bf55-83e9-331a-899d-a82a60b9f60c,81cceed4-235e-1775-a00a-4cbf8a04452c,314231,Simvastatin 10 MG Oral Tablet,0.45,0.36,12,5.40,55822004,Hyperlipidemia (disorder)
-2025-05-17T00:07:36Z,2025-05-17T00:07:36Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-5ea0-1568728c784f,313521,tropicamide 5 MG/ML Ophthalmic Solution,129.94,0.00,1,129.94,,
-2025-05-17T00:22:20Z,2025-05-17T00:22:20Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-5ea0-1568728c784f,1191013,proparacaine hydrochloride 5 MG/ML Ophthalmic Solution,129.94,21.50,1,129.94,,
-2017-03-24T10:10:57Z,2018-03-24T10:10:57Z,ac3f694c-3c79-77d1-228a-e2737736700c,d18ef2e6-ef40-324c-be54-34a5ee865625,ac3f694c-3c79-77d1-2fdb-daf325ffd0bb,314231,Simvastatin 10 MG Oral Tablet,0.30,0.00,12,3.60,55822004,Hyperlipidemia (disorder)
-2021-11-13T08:19:16Z,2022-11-19T08:19:16Z,81cceed4-235e-1775-976d-29140fa47a46,a735bf55-83e9-331a-899d-a82a60b9f60c,81cceed4-235e-1775-e9b8-e91151d9f9f0,209387,Acetaminophen 325 MG Oral Tablet [Tylenol],129.94,103.95,3,389.82,,
-2018-03-24T10:10:57Z,2019-04-05T10:10:57Z,ac3f694c-3c79-77d1-228a-e2737736700c,df166300-5a78-3502-a46a-832842197811,ac3f694c-3c79-77d1-2de6-5a7d758c614f,314231,Simvastatin 10 MG Oral Tablet,0.30,0.00,12,3.60,55822004,Hyperlipidemia (disorder)
-2022-06-30T08:19:16Z,2023-06-30T08:19:16Z,81cceed4-235e-1775-976d-29140fa47a46,a735bf55-83e9-331a-899d-a82a60b9f60c,81cceed4-235e-1775-05a8-d0da31108003,314231,Simvastatin 10 MG Oral Tablet,0.30,0.24,12,3.60,55822004,Hyperlipidemia (disorder)
-2019-04-05T10:10:57Z,2020-04-04T10:10:57Z,ac3f694c-3c79-77d1-228a-e2737736700c,df166300-5a78-3502-a46a-832842197811,ac3f694c-3c79-77d1-287a-14d08e82ec2f,314231,Simvastatin 10 MG Oral Tablet,0.45,0.00,12,5.40,55822004,Hyperlipidemia (disorder)
-2019-04-12T13:24:42Z,2019-04-12T13:24:42Z,ac3f694c-3c79-77d1-228a-e2737736700c,df166300-5a78-3502-a46a-832842197811,ac3f694c-3c79-77d1-6a03-2b93629a274d,1535362,sodium fluoride 0.0272 MG/MG Oral Gel,129.94,79.94,1,129.94,103697008,Patient referral for dental care (procedure)
-2025-07-28T10:09:03Z,2025-07-28T10:09:03Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-0238-c100e7cdc7ff,1719286,10 ML Furosemide 10 MG/ML Injection,0.08,0.06,1,0.08,88805009,Chronic congestive heart failure (disorder)
-2022-11-19T08:19:16Z,2023-11-25T08:19:16Z,81cceed4-235e-1775-976d-29140fa47a46,a735bf55-83e9-331a-899d-a82a60b9f60c,81cceed4-235e-1775-2399-362af75cff78,209387,Acetaminophen 325 MG Oral Tablet [Tylenol],129.94,0.00,3,389.82,,
-2025-07-28T22:09:03Z,2025-07-28T22:09:03Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-0238-c100e7cdc7ff,1719286,10 ML Furosemide 10 MG/ML Injection,0.06,0.05,1,0.06,88805009,Chronic congestive heart failure (disorder)
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
 2025-07-29T10:09:03Z,2025-07-29T10:09:03Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-0238-c100e7cdc7ff,1719286,10 ML Furosemide 10 MG/ML Injection,0.06,0.05,1,0.06,88805009,Chronic congestive heart failure (disorder)
 2025-07-29T22:09:03Z,2025-07-29T22:09:03Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-0238-c100e7cdc7ff,1719286,10 ML Furosemide 10 MG/ML Injection,0.04,0.03,1,0.04,88805009,Chronic congestive heart failure (disorder)
 2025-07-30T10:09:03Z,2025-07-30T10:09:03Z,6e809ed0-be5f-2ae5-0bff-7a96012ba03b,a735bf55-83e9-331a-899d-a82a60b9f60c,6e809ed0-be5f-2ae5-0238-c100e7cdc7ff,1719286,10 ML Furosemide 10 MG/ML Injection,0.04,0.03,1,0.04,88805009,Chronic congestive heart failure (disorder)
