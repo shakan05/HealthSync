@@ -1,6 +1,11 @@
 -- HealthSync AI — Person 3: Patient Identity Resolution + Storage
 -- PostgreSQL schema for standardized_records, patient identity, and provenance.
 
+-- Single sequence for human-readable patient IDs (HS-P00001, HS-P00002, ...),
+-- shared across both sources. Which source a patient came from is tracked in
+-- patient_id_mapping.source_provider / provenance.source_provider, not in the ID itself.
+CREATE SEQUENCE healthsync_patient_seq START 1;
+
 CREATE TABLE patients (
     healthsync_patient_id TEXT PRIMARY KEY,
     name TEXT,

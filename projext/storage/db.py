@@ -2,9 +2,9 @@
 Database connection helper for the storage layer.
 
 Reads connection details from environment variables so no password ever
-lives in code or gets committed to the repo. Set these in your shell before
-running anything, or use a local .env file (loaded via python-dotenv) that
-is listed in .gitignore.
+lives in code or gets committed to the repo. Values are loaded from a
+.env file at the repo root via python-dotenv (load_dotenv() below finds
+it automatically by searching upward from this file's location).
 
 Required environment variables:
     DB_HOST      e.g. "localhost"
@@ -16,6 +16,9 @@ Required environment variables:
 
 import os
 import psycopg2
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def get_connection():
@@ -23,7 +26,7 @@ def get_connection():
     return psycopg2.connect(
         host=os.environ.get("DB_HOST", "localhost"),
         port=os.environ.get("DB_PORT", "5432"),
-        dbname=os.environ.get("DB_NAME", "HealthSync"),
+        dbname=os.environ.get("DB_NAME", "healthsync"),
         user=os.environ.get("DB_USER", "postgres"),
         password=os.environ.get("DB_PASSWORD", ""),
     )
