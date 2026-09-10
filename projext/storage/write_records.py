@@ -105,10 +105,11 @@ def write_standardized_record(cur, resource: dict, row: dict, resource_type: str
         (canonical_patient_id, fhir_type, resource_id, event_date, source, json.dumps(resource)),
     )
     result = cur.fetchone()
+    newly_inserted = result is not None
 
-    if result is None:
+    if not newly_inserted:
         # Already existed (this exact row was ingested before) -- fetch its
-        # record_id so provenance can still reference it if needed.
+        # record_id, but do NOT insert a second provenance row for it.
         cur.execute(
             "SELECT record_id FROM standardized_records WHERE resource_type = %s AND resource_id = %s",
             (fhir_type, resource_id),
@@ -117,12 +118,13 @@ def write_standardized_record(cur, resource: dict, row: dict, resource_type: str
 
     record_id = result[0]
 
-    cur.execute(
-        """
-        INSERT INTO provenance (record_id, source_provider, source_file, source_record_id)
-        VALUES (%s, %s, %s, %s)
-        """,
-        (record_id, source, None, resource_id),
-    )
+    if newly_inserted:
+        cur.execute(
+            """
+            INSERT INTO provenance (record_id, source_provider, source_file, source_record_id)
+            VALUES (%s, %s, %s, %s)
+            """,
+            (record_id, source, None, resource_id),
+        )
 
     return resource_id
