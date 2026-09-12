@@ -3,25 +3,16 @@ Patient identity resolution.
 
 Source A (Synthea): resolved via exact SSN match. Same real-world person
 across multiple Synthea files/patients rows -> same healthsync_patient_id.
-
-Source B (Patient Records 100K): has no identity key (no SSN, no name, no
-DOB -- confirmed against the real files). It is NOT run through SSN
-resolution at all. Each Source B patient_id becomes its own unlinked
-healthsync_patient_id, in its own namespace, with ssn = NULL. This is a
-deliberate scope decision, not a stopgap -- see team discussion notes.
-
-Both sources share one ID format (HS-P00001, HS-P00002, ...) drawn from a
-single sequence -- the ID itself doesn't reveal which source a patient came
-from; that's tracked separately in patient_id_mapping.source_provider and
-provenance.source_provider. Both paths funnel into the same
-patient_id_mapping table so every other resource type (encounters,
-conditions, ...) can look up the canonical patient the same way regardless
-of source.
+(Source B was originally supported here too, but the team decided not to
+use Source B at all -- see project notes -- so that path has been removed.)
 """
 
 import re
 
-from db import get_connection
+try:
+    from .db import get_connection  # when imported as part of the storage package
+except ImportError:
+    from db import get_connection  # when run standalone (e.g. python identity.py)
 
 
 def _next_id(cur) -> str:
@@ -98,19 +89,6 @@ def resolve_patient_identity(cur, source_provider: str, provider_patient_id: str
     return healthsync_id
 
 
-def assign_unlinked_patient(cur, source_provider: str, provider_patient_id: str,
-                             name: str = None, date_of_birth: str = None,
-                             gender: str = None) -> str:
-    """
-    Source B path. No identity resolution is attempted -- every call creates
-    a brand new patient with ssn = NULL, in its own source-scoped namespace.
-    """
-    healthsync_id = _next_id(cur)
-    _insert_patient(cur, healthsync_id, None, name, date_of_birth, gender)
-    _insert_patient_id_mapping(cur, healthsync_id, source_provider, provider_patient_id)
-    return healthsync_id
-
-
 def get_canonical_patient_id(cur, source_provider: str, provider_patient_id: str) -> str:
     """
     Used by every non-patient resource type (encounters, conditions, ...) to
@@ -133,17 +111,14 @@ def get_canonical_patient_id(cur, source_provider: str, provider_patient_id: str
 
 
 if __name__ == "__main__":
-    # Quick manual test against a couple of made-up rows. Replace with real
-    # Synthea patients.csv rows once you're ready to test for real.
+    # Quick manual test against a made-up row. Replace with real Synthea
+    # patients.csv rows once you're ready to test for real.
     conn = get_connection()
     cur = conn.cursor()
 
     id1 = resolve_patient_identity(cur, "source_a", "synthea-uuid-1", "123-45-6789")
     id2 = resolve_patient_identity(cur, "source_a", "synthea-uuid-1", "123-45-6789")
     print(f"Same patient re-ingested: {id1} == {id2} -> {id1 == id2}")
-
-    id3 = assign_unlinked_patient(cur, "source_b", "row-001")
-    print(f"Source B unlinked patient: {id3}")
 
     conn.rollback()  # don't actually persist this test run
     cur.close()

@@ -3,18 +3,15 @@ Main end-to-end pipeline execution script.
 Orchestrates:
   1. Person 1: Ingestion & Validation (Source A & Source B)
   2. Person 2: FHIR Standardization & Mapping
-  3. Writes one JSON file per patient (ready for Person 3 - Hashing & Storage)
+  3. Person 3: Identity Resolution + Storage (Postgres, replaces the
+     earlier per-patient-JSON output now that Person 3's storage layer
+     is built and verified)
 """
 
-import json
-import re
 from pathlib import Path
-from collections import defaultdict
 
 # Person 1 Imports
 from adapters.source_a_synthea import run_source_a
-from adapters.source_b_patient_records100k import run_source_b
-from rejected import RejectedRecordWriter
 
 # Person 2 Imports
 from mappers.patient import map_patient
@@ -25,118 +22,112 @@ from mappers.observation import map_observation
 from mappers.procedure import map_procedure
 from mappers.allergy import map_allergy
 
+# Person 3 Imports
+from storage.db import get_connection
+from storage.identity import resolve_patient_identity
+from storage.write_records import (
+    write_patient_resource,
+    build_patient_mapping_cache,
+    prepare_batch_row,
+    write_standardized_records_batch,
+)
+from storage.db_rejected_writer import DbRejectedRecordWriter
+
+import os
+
 BASE_DIR = Path(__file__).resolve().parent
-OUTPUT_DIR = BASE_DIR / "output"
-PATIENTS_DIR = OUTPUT_DIR / "patients"
+
+# For quick local testing without touching real data: set env var
+# HEALTHSYNC_DATA_DIR to point at a small sample folder instead. Leave unset
+# for normal use -- defaults to the real projext/data folder, unchanged.
+DATA_ROOT = Path(os.environ.get("HEALTHSYNC_DATA_DIR", str(BASE_DIR / "data")))
+
+# (schema.py resource_type key, mapper function, event_date field)
+RESOURCE_JOBS = [
+    ("encounters", map_encounter, "START"),
+    ("conditions", map_condition, "START"),
+    ("medications", map_medication_request, "START"),
+    ("observations", map_observation, "DATE"),
+    ("procedures", map_procedure, "START"),
+    ("allergies", map_allergy, "START"),
+]
 
 
-def safe_filename(key: str) -> str:
-    """Sanitize a patient key so it's safe to use as a filename."""
-    return re.sub(r"[^A-Za-z0-9._-]", "_", key)
+def _ingest_patients(cur, valid_records: dict, source: str) -> int:
+    stored, skipped = 0, 0
+    for row in valid_records.get("patients", []):
+        try:
+            healthsync_id = resolve_patient_identity(
+                cur, source, row.get("PATIENT_ID", ""),
+                raw_ssn=row.get("SSN", ""),
+                name=f"{row.get('FIRST', '')} {row.get('LAST', '')}".strip() or None,
+                date_of_birth=row.get("BIRTHDATE") or None,
+                gender=row.get("GENDER") or None,
+            )
+            # Also store the full FHIR Patient resource (preserves fields/
+            # extensions the flat `patients` table can't hold).
+            patient_resource = map_patient(row, source)
+            write_patient_resource(cur, patient_resource, healthsync_id, source)
+            stored += 1
+        except ValueError as e:
+            skipped += 1
+            print(f"  patients SKIPPED: {e}")
+    print(f"  patients: {stored} stored, {skipped} skipped")
+    cur.connection.commit()  # commit patients before moving on to resources
+    return stored
 
 
-def patient_key(row: dict, source: str, id_field: str) -> str:
-    """Same key used in subject/patient references, e.g. 'source_a-abc123'."""
-    patient_id = row.get(id_field, "") or "UNKNOWN"
-    return f"{source}-{patient_id}"
+def _ingest_resources(cur, valid_records: dict, source: str) -> None:
+    # One bulk query instead of one lookup per row -- see write_records.py.
+    mapping_cache = build_patient_mapping_cache(cur, source)
 
+    for resource_type, map_func, date_field in RESOURCE_JOBS:
+        rows = valid_records.get(resource_type, [])
+        prepared = []
+        skipped = 0
+        for row in rows:
+            try:
+                resource = map_func(row, source)
+                prepared_row = prepare_batch_row(
+                    row, resource, resource_type, source, mapping_cache,
+                    event_date=row.get(date_field),
+                )
+                prepared.append(prepared_row)
+            except ValueError as e:
+                skipped += 1
+                print(f"  {resource_type} SKIPPED: {e}")
 
-def write_patient_files(patient_buckets: dict) -> None:
-    """
-    Writes one JSON file per patient: output/patients/<source>-<patient_id>.json
-    Each file contains only that patient's own resources.
-    """
-    PATIENTS_DIR.mkdir(parents=True, exist_ok=True)
-
-    for key, resources in patient_buckets.items():
-        counts = defaultdict(int)
-        for r in resources:
-            counts[r.get("resourceType", "Unknown")] += 1
-
-        bundle = {
-            "patientKey": key,
-            "resourceCounts": dict(counts),
-            "resources": resources,
-        }
-
-        out_path = PATIENTS_DIR / f"{safe_filename(key)}.json"
-        with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(bundle, f, indent=2, default=str)
-
-    print(f"-> Wrote {len(patient_buckets)} patient file(s) to: {PATIENTS_DIR}")
+        newly_stored = write_standardized_records_batch(cur, prepared)
+        already_existed = len(prepared) - newly_stored
+        print(
+            f"  {resource_type}: {newly_stored} newly stored, "
+            f"{already_existed} already existed, {skipped} skipped"
+        )
+        cur.connection.commit()  # commit after each resource type, not just at the very end --
+        # if the run gets interrupted, you only lose progress on the CURRENT
+        # resource type, not everything done so far.
 
 
 def run_pipeline():
     print("=== Starting HealthSync End-to-End Pipeline ===\n")
 
-    # 1. Person 1: Ingestion & Validation
-    rejected_writer = RejectedRecordWriter(str(OUTPUT_DIR / "rejected_records.csv"))
+    conn = get_connection()
+    cur = conn.cursor()
+    rejected_writer = DbRejectedRecordWriter(cur)
 
-    print("Running Person 1 validation & ingestion (Source A - Synthea)...")
-    valid_a = run_source_a(str(BASE_DIR / "data" / "source_a"), rejected_writer)
-
-    print("Running Person 1 validation & ingestion (Source B - 100K Records)...")
-    valid_b = run_source_b(str(BASE_DIR / "data" / "source_b"), rejected_writer)
+    print("=== Source A ===")
+    valid_a = run_source_a(str(DATA_ROOT / "source_a"), rejected_writer)
+    _ingest_patients(cur, valid_a, "source_a")
+    _ingest_resources(cur, valid_a, "source_a")
 
     rejected_writer.flush()
-    print(f"-> Ingestion complete. Rejected records written to: {rejected_writer.output_path}\n")
+    print(f"\nRejected rows written to rejected_records table: {rejected_writer.count()}")
 
-    # 2. Person 2: FHIR Standardization & Mapping
-    print("Running Person 2 FHIR standardization...")
+    conn.commit()
+    cur.close()
+    conn.close()
 
-    patient_buckets = defaultdict(list)
-
-    def add(resource, key):
-        patient_buckets[key].append(resource)
-
-    # --- Source A ---
-    for row in valid_a.get("patients", []):
-        add(map_patient(row, "source_a"), patient_key(row, "source_a", "PATIENT_ID"))
-
-    for row in valid_a.get("encounters", []):
-        add(map_encounter(row, "source_a"), patient_key(row, "source_a", "PATIENT"))
-
-    for row in valid_a.get("conditions", []):
-        add(map_condition(row, "source_a"), patient_key(row, "source_a", "PATIENT"))
-
-    for row in valid_a.get("observations", []):
-        add(map_observation(row, "source_a"), patient_key(row, "source_a", "PATIENT"))
-
-    for row in valid_a.get("medications", []):
-        add(map_medication_request(row, "source_a"), patient_key(row, "source_a", "PATIENT"))
-
-    for row in valid_a.get("procedures", []):
-        add(map_procedure(row, "source_a"), patient_key(row, "source_a", "PATIENT"))
-
-    for row in valid_a.get("allergies", []):
-        add(map_allergy(row, "source_a"), patient_key(row, "source_a", "PATIENT"))
-
-    # --- Source B ---
-    for row in valid_b.get("patients", []):
-        add(map_patient(row, "source_b"), patient_key(row, "source_b", "PATIENT_ID"))
-
-    for row in valid_b.get("encounters", []):
-        add(map_encounter(row, "source_b"), patient_key(row, "source_b", "PATIENT"))
-
-    for row in valid_b.get("conditions", []):
-        add(map_condition(row, "source_b"), patient_key(row, "source_b", "PATIENT"))
-
-    for row in valid_b.get("observations", []):
-        add(map_observation(row, "source_b"), patient_key(row, "source_b", "PATIENT"))
-
-    for row in valid_b.get("medications", []):
-        add(map_medication_request(row, "source_b"), patient_key(row, "source_b", "PATIENT"))
-
-    total_resources = sum(len(v) for v in patient_buckets.values())
-    print(f"-> Generated {total_resources} FHIR resources across {len(patient_buckets)} patients.\n")
-
-    # 3. Write one JSON file per patient
-    print("Writing per-patient JSON files...")
-    write_patient_files(patient_buckets)
-
-    print("\n=== Pipeline Execution Complete (Ready for Person 3) ===")
-
-    return patient_buckets
+    print("\n=== Pipeline Execution Complete: data stored in Postgres ===")
 
 
 if __name__ == "__main__":
