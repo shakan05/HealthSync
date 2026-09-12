@@ -43,6 +43,7 @@ CREATE TABLE provenance (
 CREATE TABLE rejected_records (
     id SERIAL PRIMARY KEY,
     source TEXT,
+    resource_type TEXT,
     row_number INTEGER,
     reason TEXT,
     raw_row JSONB
