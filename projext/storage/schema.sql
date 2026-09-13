@@ -48,3 +48,12 @@ CREATE TABLE rejected_records (
     reason TEXT,
     raw_row JSONB
 );
+
+-- Indexes beyond what PRIMARY KEY/UNIQUE already provide automatically:
+-- standardized_records.patient_id has no index by default, but it's the
+-- single most common lookup in the whole system (every "give me this
+-- patient's full history" query filters on it) -- without this, every such
+-- query does a full table scan across millions of rows.
+CREATE INDEX idx_standardized_records_patient_id ON standardized_records(patient_id);
+CREATE INDEX idx_standardized_records_event_date ON standardized_records(event_date);
+CREATE INDEX idx_provenance_record_id ON provenance(record_id);
