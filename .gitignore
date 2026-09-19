@@ -3,6 +3,8 @@ __pycache__/
 .venv/
 venv/
 env/
+models/
+outputs/
 .env
 projext/output/*
 !projext/output/.gitkeep
